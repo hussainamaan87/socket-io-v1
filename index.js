@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
 
 // Basic route for server health check
 app.get('/', (req, res) => {
-    res.send('Server is running...');
+    res.send('Server is running....');
 });
 
 // Start the server
