@@ -9,7 +9,7 @@ const server = http.createServer(app);
 
 // Allowed origins for CORS
 const allowedOrigins = [
-    process.env.FRONTEND_URL || "http://localhost:3000", // React frontend
+    process.env.FRONTEND_URL || "http://localhost:3000" || "http://localhost:5173", // React frontend
     "capacitor://localhost", // Android apps using Capacitor
     "http://localhost" // Localhost for emulator or testing
 ];
@@ -46,6 +46,7 @@ const fetchDataForCity = async (cityName) => {
         console.log(`Fetching data for city: ${cityName}`);
         const response = await axios.get(`https://sih.anujg.me/fetch/${cityName}`);
         const data = response.data;
+        console.log(data);
 
         // Cache the data and broadcast it
         cityDataCache[cityName] = data;
