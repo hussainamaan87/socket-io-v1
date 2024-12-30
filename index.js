@@ -36,7 +36,7 @@ const fetchDataForCity = async (cityName) => {
         console.log(`Fetching data for city: ${cityName}`);
         const response = await axios.get(`https://sih.anujg.me/fetch/${cityName}`);
         const data = response.data;
-        console.log(data);
+        // console.log(data);
 
         // Cache the data and broadcast it
         cityDataCache[cityName] = data;
