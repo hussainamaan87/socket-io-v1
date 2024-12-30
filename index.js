@@ -7,18 +7,21 @@ const cors = require('cors');
 const app = express();
 const server = http.createServer(app);
 
-// Relaxed CORS Policy
+// CORS Middleware
 app.use(cors({
-    origin: "*", // Allow all origins
+    origin: "*", // Allow requests from any origin
     methods: ["GET", "POST"],
-    credentials: false // Set to true if you want to allow cookies or headers
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
+    credentials: true // Allow credentials if needed
 }));
 
 // Socket.IO setup with CORS
 const io = new Server(server, {
     cors: {
-        origin: "*", // Allow all origins
+        origin: "*", // Allow requests from any origin
         methods: ["GET", "POST"],
+        allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
+        credentials: true // Allow credentials if needed
     },
 });
 
@@ -89,6 +92,9 @@ io.on('connection', (socket) => {
 
 // Health check endpoint
 app.get('/', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Add CORS header for this endpoint
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.send('Server is running....');
 });
 
